@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@a2seven/yoo-checkout": "^1.1.4",
     "@qiwi/bill-payments-node-js-sdk": "^2.2.4",
     "@types/axios": "^0.14.0",
     "@types/body-parser": "^1.19.2",

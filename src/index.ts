@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import rlhubContext from './bot/models/rlhubContext';
 import { Scenes, Telegraf, session } from 'telegraf';
-import axios from 'axios';
 dotenv.config()
 export const bot = new Telegraf<rlhubContext>(process.env.bot!);
 

@@ -23,6 +23,9 @@ app.use((req, res, next) => {
 
 app.post(secretPath, (req, res) => { bot.handleUpdate(req.body, res); });
 app.get("/", (req, res) => res.send("Бот запущен!"))
+app.use("/success", (req, res) => {
+    console.log(req.body)
+})
 
 app.use(morgan("dev"));
 app.use(express.json())
