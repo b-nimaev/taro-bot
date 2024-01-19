@@ -79,7 +79,7 @@ async function actionHandler(ctx: rlhubContext) {
             let message = response.data.answer
 
             if (user.subscribe) {
-                message += `\n\nУ вас действует подписка!`
+                message += `У вас действует подписка!`
             } else {
                 message += `\n\nОсталось вопросов ${user.freeSpin - 1}/3`
             }
@@ -254,23 +254,22 @@ async function renderAction(ctx: rlhubContext) {
 
             message += `\n\n`
             const me = await getMe(ctx)
-
-            if (!me) { return false }
-
-            if (me.subscribe) {
-                message += `\n\nУ вас действует подписка!`
-            } else {
-                message += `\n\nОсталось вопросов ${me.freeSpin - 1}/3`
-            }
-
-            const extra: ExtraEditMessageText = {
+            let extra: ExtraEditMessageText = {
                 parse_mode: 'HTML',
                 reply_markup: {
                     inline_keyboard: [
                         // [{ text: 'Расклад таро', callback_data: 'taro-action' }],
-                        [{ text: `👑 Перейти на премиум от ${data.price} ₽ 👑`, callback_data: 'taro-action' }],
+                        // [{ text: `👑 Перейти на премиум от ${data.price} ₽ 👑`, callback_data: 'taro-action' }],
                     ]
                 }
+            }
+            if (!me) { return false }
+
+            if (me.subscribe) {
+                message += `У вас действует подписка!`
+            } else {
+                message += `Осталось вопросов ${me.freeSpin - 1}/3`
+                extra.reply_markup.inline_keyboard.push([{ text: `👑 Перейти на премиум от ${data.price} ₽ 👑`, callback_data: 'taro-action' }])
             }
 
             await ctx.editMessageText(message, extra)
