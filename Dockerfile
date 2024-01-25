@@ -1,24 +1,20 @@
-# Базовый образ
-FROM node:14
+# Установите базовый образ
+FROM node:latest
 
-# Создание директории приложения
-WORKDIR /usr/src/app
+# Установите рабочую директорию в контейнере
+WORKDIR /app
 
-# Копирование файлов package.json и package-lock.json
+# Копируйте файлы package.json и package-lock.json
 COPY package*.json ./
 
-# Установка зависимостей
+# Установите зависимости
 RUN npm install
 
-# Копирование исходного кода приложения
-COPY . ./
+# Копируйте остальные файлы проекта
+COPY . .
 
 # Компиляция TypeScript в JavaScript
 RUN npx tsc --p 'tsconfig.json'
 
-# Указание порта, который будет слушать приложение
-EXPOSE 5000
-
 # Запуск приложения
 CMD [ "node", "dist/index.js" ]
-

@@ -9,6 +9,7 @@ import { Invoice } from "telegraf/typings/core/types/typegram";
 import { ICreatePayment, ICreateWebHook, YooCheckout } from '@a2seven/yoo-checkout';
 const checkout = new YooCheckout({ shopId: '579916', secretKey: 'test_y3qEuwmGrbzcofTe0_QeFqhJryakOv-4z20Hu2fiDL0' });
 interface ApiResponse {
+    document: false | { greeting: string; action: string; price: number; } | PromiseLike<false | { greeting: string; action: string; price: number; }>;
     // Определите тип данных, ожидаемых от вашего API
     // Например, если API возвращает объект с полем "data", вы можете указать это здесь
     data: any; // Замените any на реальный тип данных
@@ -177,7 +178,7 @@ async function getMe(ctx: rlhubContext): Promise<{ freeSpin: number, subscribe: 
 const greeting = async function (ctx: rlhubContext) {
 
     try {
-
+        console.log('greeting')
         const token: string | null = await auth();
         if (!token) {
             return false;
